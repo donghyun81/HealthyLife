@@ -1,6 +1,12 @@
 <resources>
+
+<!--    activity_main String-->
     <string name="app_name">HealthyLife</string>
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_check">Check</string>
+
+
+
+
 </resources>
