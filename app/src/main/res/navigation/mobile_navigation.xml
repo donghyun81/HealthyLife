@@ -21,5 +21,43 @@
         android:id="@+id/navigation_check"
         android:name="com.example.healthylife.ui.Check.CheckFragment"
         android:label="@string/title_add"
-        tools:layout="@layout/fragment_check" />
+        tools:layout="@layout/fragment_check">
+        <action
+            android:id="@+id/action_navigation_check_to_checkAddFragment"
+            app:destination="@id/checkAddFragment" />
+        <action
+            android:id="@+id/action_navigation_check_to_checkDetailFragment"
+            app:destination="@id/checkDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkAddFragment"
+        android:name="com.example.healthylife.ui.Check.CheckAddFragment"
+        android:label="fragment_check_add"
+        tools:layout="@layout/fragment_check_add" >
+
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="exercise_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_checkAddFragment_to_navigation_check"
+            app:destination="@id/navigation_check"
+            app:popUpTo="@id/navigation_check"
+            app:popUpToInclusive="true" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/checkDetailFragment"
+        android:name="com.example.healthylife.ui.Check.CheckDetailFragment"
+        android:label="fragment_check_detail"
+        tools:layout="@layout/fragment_check_detail" >
+
+        <argument
+            android:name="exercise_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

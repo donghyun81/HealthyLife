@@ -1,12 +1,40 @@
 <resources>
 
-<!--    activity_main String-->
+    <!--    activity_main String-->
     <string name="app_name">HealthyLife</string>
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_check">Check</string>
 
+    <!--    fragment_home String-->
+    <string name="fragment_home_add_exercise">운동 불러오기</string>
 
 
+    <!--    fragment_check String-->
+    <string name="fragment_check_exercise_name">이름</string>
+    <string name="fragment_check_exercise_set">세트</string>
+    <string name="fragment_check_exercise_weight">무게</string>
+    <string name="fragment_check_exercise_count">횟수</string>
+    <string name="fragment_check_exercise_add_button">운동 추가</string>
+
+    <!--    fragment_check_add String-->
+    <string name="fragment_check_add_exercise_title">운동 추가</string>
+    <string name="fragment_check_add_exercise_name">이름 입력</string>
+    <string name="fragment_check_add_exercise_set">세트 입력</string>
+    <string name="fragment_check_add_exercise_weight">무게 입력</string>
+    <string name="fragment_check_add_exercise_count">횟수 입력</string>
+    <string name="fragment_check_add_exercise_save">저장</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="fragment_check_detail_exercise_title">운동 추가</string>
+    <string name="fragment_check_detail_exercise_name">이름 입력</string>
+    <string name="fragment_check_detail_exercise_set">세트 입력</string>
+    <string name="fragment_check_detail_exercise_weight">무게 입력</string>
+    <string name="fragment_check_detail_exercise_count">횟수 입력</string>
+    <string name="fragment_check_detail_exercise_save">저장</string>
+    <string name="fragment_check_detail_exercise_update">변경</string>
+    <string name="fragment_check_detail_exercise_delete">삭제</string>
 
 </resources>

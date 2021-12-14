@@ -4,15 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.Check.CheckFragment">
-
+    android:layout_height="40dp"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/fragment_check_exercise_name"
-        style="@style/Widget.check.TextView"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_between_elements"
-
         android:text="@string/fragment_check_exercise_name"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/fragment_check_exercise_set"
@@ -22,9 +21,10 @@
 
     <TextView
         android:id="@+id/fragment_check_exercise_set"
-        style="@style/Widget.check.TextView"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/fragment_check_exercise_name"
-        android:layout_marginEnd="@dimen/margin_between_elements"
+        android:layout_margin="@dimen/margin_between_elements"
         android:text="@string/fragment_check_exercise_set"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/fragment_check_exercise_weight"
@@ -34,9 +34,10 @@
 
     <TextView
         android:id="@+id/fragment_check_exercise_weight"
-        style="@style/Widget.check.TextView"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/margin_between_elements"
+        android:layout_margin="@dimen/margin_between_elements"
         android:text="@string/fragment_check_exercise_weight"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/fragment_check_exercise_count"
@@ -45,9 +46,10 @@
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/fragment_check_exercise_count"
-        style="@style/Widget.check.TextView"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/margin_between_elements"
+        android:layout_margin="@dimen/margin_between_elements"
         android:text="@string/fragment_check_exercise_count"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,29 +57,4 @@
         app:layout_constraintStart_toEndOf="@+id/fragment_check_exercise_weight"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider"
-        style="@style/Divider"
-        android:layout_marginTop="@dimen/margin_between_elements"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_check_exercise_count" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider">
-    </androidx.recyclerview.widget.RecyclerView>
-    <Button
-        android:id="@+id/fragment_check_exercise_add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment_check_exercise_add_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

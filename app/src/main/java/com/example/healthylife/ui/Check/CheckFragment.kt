@@ -4,19 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.healthylife.R
+import com.example.healthylife.data.ExerciseApplication
 import com.example.healthylife.databinding.FragmentCheckBinding
 
 class CheckFragment : Fragment() {
 
-    private lateinit var checkViewModel: CheckViewModel
-    private var _binding: FragmentCheckBinding? = null
+    private val viewModel: CheckViewModel by activityViewModels {
+        CheckViewModelFactory(
+            (activity?.application as ExerciseApplication).database.exerciseDao()
+        )
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
+    private var _binding: FragmentCheckBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,21 +29,36 @@ class CheckFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        checkViewModel =
-            ViewModelProvider(this).get(CheckViewModel::class.java)
 
         _binding = FragmentCheckBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textCheck
-        checkViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapter = CheckListAdapter {
+            val action =
+                CheckFragmentDirections.actionNavigationCheckToCheckDetailFragment(it.id)
+            this.findNavController().navigate(action)
+        }
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.adapter = adapter
+
+        viewModel.allExercises.observe(this.viewLifecycleOwner) { items ->
+            items.let {
+                adapter.submitList(it)
+            }
+        }
+
+        binding.fragmentCheckExerciseAddButton.setOnClickListener() {
+            val action =CheckFragmentDirections.actionNavigationCheckToCheckAddFragment(
+                getString(R.string.fragment_check_add_exercise_title)
+            )
+
+            this.findNavController().navigate(action)
+        }
     }
+
+
 }
