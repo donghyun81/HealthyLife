@@ -1,8 +1,8 @@
-package com.example.healthylife.ui.Check
+package com.example.healthylife.ui.check
 
 import androidx.lifecycle.*
-import com.example.healthylife.data.Exercise
-import com.example.healthylife.data.ExerciseDao
+import com.example.healthylife.data.exercise.Exercise
+import com.example.healthylife.data.exercise.ExerciseDao
 import kotlinx.coroutines.launch
 
 class CheckViewModel(private val exerciseDao: ExerciseDao): ViewModel() {

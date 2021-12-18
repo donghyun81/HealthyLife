@@ -1,4 +1,4 @@
-package com.example.healthylife.ui.Add
+package com.example.healthylife.ui.add
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

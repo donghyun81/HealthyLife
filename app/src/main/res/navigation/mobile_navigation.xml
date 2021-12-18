@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_add"
-        android:name="com.example.healthylife.ui.Add.AddFragment"
+        android:name="com.example.healthylife.ui.add.AddFragment"
         android:label="@string/title_check"
         tools:layout="@layout/fragment_add" />
 
     <fragment
         android:id="@+id/navigation_check"
-        android:name="com.example.healthylife.ui.Check.CheckFragment"
+        android:name="com.example.healthylife.ui.check.CheckFragment"
         android:label="@string/title_add"
         tools:layout="@layout/fragment_check">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/checkAddFragment"
-        android:name="com.example.healthylife.ui.Check.CheckAddFragment"
+        android:name="com.example.healthylife.ui.check.CheckAddFragment"
         android:label="fragment_check_add"
         tools:layout="@layout/fragment_check_add" >
 
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/checkDetailFragment"
-        android:name="com.example.healthylife.ui.Check.CheckDetailFragment"
+        android:name="com.example.healthylife.ui.check.CheckDetailFragment"
         android:label="fragment_check_detail"
         tools:layout="@layout/fragment_check_detail" >
 

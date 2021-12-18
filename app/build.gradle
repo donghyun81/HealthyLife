@@ -60,4 +60,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+    //Collapsible Calendar View
+    implementation 'com.github.shrikanth7698:Collapsible-Calendar-View-Android:v1.0.3'
 }

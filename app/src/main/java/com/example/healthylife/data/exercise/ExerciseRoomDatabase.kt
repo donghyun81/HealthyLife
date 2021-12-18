@@ -1,4 +1,4 @@
-package com.example.healthylife.data
+package com.example.healthylife.data.exercise
 
 import android.content.Context
 import androidx.room.Database
@@ -7,13 +7,13 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Exercise::class],version = 1,exportSchema = false)
 abstract class ExerciseRoomDatabase: RoomDatabase() {
-    abstract fun exerciseDao():ExerciseDao
+    abstract fun exerciseDao(): ExerciseDao
 
     companion object{
         @Volatile
-        private var INSTANCE:ExerciseRoomDatabase?=null
+        private var INSTANCE: ExerciseRoomDatabase?=null
 
-        fun getDatabase(context: Context) :ExerciseRoomDatabase{
+        fun getDatabase(context: Context) : ExerciseRoomDatabase {
             return INSTANCE ?: synchronized(this ){
                 val instance= Room.databaseBuilder(
                     context.applicationContext,

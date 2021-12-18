@@ -1,4 +1,4 @@
-package com.example.healthylife.data
+package com.example.healthylife.data.exercise
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

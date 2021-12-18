@@ -1,4 +1,7 @@
 <resources>
     <dimen name="margin">16dp</dimen>
     <dimen name="margin_between_elements">8dp</dimen>
+
+    <dimen name="card_view_elevation">10dp</dimen>
+    <dimen name="card_view_corner_radius">10dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.healthylife.ui.Check
+package com.example.healthylife.ui.check
 
 
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.healthylife.data.Exercise
+import com.example.healthylife.data.exercise.Exercise
 import com.example.healthylife.databinding.ItemListExerciseBinding
 
 class CheckListAdapter(private val onItemClicked:(Exercise)->Unit):

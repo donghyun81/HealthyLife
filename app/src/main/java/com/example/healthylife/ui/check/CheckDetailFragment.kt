@@ -1,4 +1,4 @@
-package com.example.healthylife.ui.Check
+package com.example.healthylife.ui.check
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.healthylife.data.Exercise
-import com.example.healthylife.data.ExerciseApplication
+import com.example.healthylife.data.exercise.Exercise
+import com.example.healthylife.data.HealthyLifeApplication
 import com.example.healthylife.databinding.FragmentCheckDetailBinding
 
 
@@ -18,7 +18,7 @@ class CheckDetailFragment : Fragment() {
 
     private val viewModel:CheckViewModel by activityViewModels{
         CheckViewModelFactory(
-            (activity?.application as ExerciseApplication).database.exerciseDao()
+            (activity?.application as HealthyLifeApplication).databaseExercise.exerciseDao()
         )
     }
 
@@ -61,10 +61,10 @@ class CheckDetailFragment : Fragment() {
         if(isEntryValid()) {
             viewModel.updateExercise(
                 this.navigationArgs.exerciseId,
-                this.binding.fragmentCheckExerciseDetailName.toString(),
-                this.binding.fragmentCheckExerciseDetailSet.toString(),
-                this.binding.fragmentCheckExerciseDetailWeight.toString(),
-                this.binding.fragmentCheckExerciseDetailCount.toString()
+                this.binding.fragmentCheckExerciseDetailName.text.toString(),
+                this.binding.fragmentCheckExerciseDetailSet.text.toString(),
+                this.binding.fragmentCheckExerciseDetailWeight.text.toString(),
+                this.binding.fragmentCheckExerciseDetailCount.text.toString()
             )
             findNavController().navigateUp()
         }
@@ -75,16 +75,19 @@ class CheckDetailFragment : Fragment() {
         findNavController().navigateUp()
     }
 
-    private fun bind(exercise:Exercise) {
+    private fun bind(exercise: Exercise) {
         binding.apply {
             fragmentCheckExerciseDetailName.setText(exercise.exercise,TextView.BufferType.SPANNABLE)
-            fragmentCheckExerciseDetailSet.setText(exercise.set,TextView.BufferType.SPANNABLE)
-            fragmentCheckExerciseDetailWeight.setText(exercise.weight,TextView.BufferType.SPANNABLE)
-            fragmentCheckExerciseDetailCount.setText(exercise.count,TextView.BufferType.SPANNABLE)
+            fragmentCheckExerciseDetailSet.setText(exercise.set.toString(),TextView.BufferType.SPANNABLE)
+            fragmentCheckExerciseDetailWeight.setText(exercise.weight.toString(),TextView.BufferType.SPANNABLE)
+            fragmentCheckExerciseDetailCount.setText(exercise.count.toString(),TextView.BufferType.SPANNABLE)
             fragmentCheckDetailExerciseUpdate.setOnClickListener{updateExercise()}
             fragmentCheckDetailExerciseDelete.setOnClickListener{deleteExercise()}
         }
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

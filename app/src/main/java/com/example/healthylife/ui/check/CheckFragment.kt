@@ -1,4 +1,4 @@
-package com.example.healthylife.ui.Check
+package com.example.healthylife.ui.check
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthylife.R
-import com.example.healthylife.data.ExerciseApplication
+import com.example.healthylife.data.HealthyLifeApplication
 import com.example.healthylife.databinding.FragmentCheckBinding
 
 class CheckFragment : Fragment() {
 
     private val viewModel: CheckViewModel by activityViewModels {
         CheckViewModelFactory(
-            (activity?.application as ExerciseApplication).database.exerciseDao()
+            (activity?.application as HealthyLifeApplication).database.exerciseDao()
         )
     }
 

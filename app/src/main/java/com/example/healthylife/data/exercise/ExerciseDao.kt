@@ -1,6 +1,7 @@
-package com.example.healthylife.data
+package com.example.healthylife.data.exercise
 
 import androidx.room.*
+import com.example.healthylife.data.calendar_exercise.CalendarExercise
 
 import kotlinx.coroutines.flow.Flow
 
@@ -22,6 +23,8 @@ interface ExerciseDao {
 
     @Delete
     suspend fun delete(exercise: Exercise)
+
+
 
 
 }
