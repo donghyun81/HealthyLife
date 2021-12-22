@@ -37,4 +37,8 @@
     <string name="fragment_check_detail_exercise_update">변경</string>
     <string name="fragment_check_detail_exercise_delete">삭제</string>
 
+
+    <string name="fragment_load_exercise_button">확인</string>
+
+
 </resources>

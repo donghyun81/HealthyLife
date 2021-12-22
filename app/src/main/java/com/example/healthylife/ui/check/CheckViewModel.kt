@@ -9,13 +9,6 @@ class CheckViewModel(private val exerciseDao: ExerciseDao): ViewModel() {
 
     val allExercises:LiveData<List<Exercise>> = exerciseDao.getExercises().asLiveData()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
-
-
-
     private fun getNewExerciseEntry(
                                  exercise:String,
                                  set: String,

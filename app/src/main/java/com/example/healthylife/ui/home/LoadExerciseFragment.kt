@@ -5,56 +5,61 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthylife.R
+import com.example.healthylife.data.HealthyLifeApplication
+import com.example.healthylife.databinding.FragmentCheckBinding
+import com.example.healthylife.databinding.FragmentLoadExerciseBinding
+import com.example.healthylife.ui.check.CheckFragmentDirections
+import com.example.healthylife.ui.check.CheckListAdapter
+import com.example.healthylife.ui.check.CheckViewModel
+import com.example.healthylife.ui.check.CheckViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoadExerciseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoadExerciseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val viewModel: CheckViewModel by activityViewModels {
+        CheckViewModelFactory(
+            (activity?.application as HealthyLifeApplication).databaseExercise.exerciseDao()
+        )
+    }
+
+
+    private var _binding: FragmentLoadExerciseBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        _binding = FragmentLoadExerciseBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapter = CheckListAdapter {
+            val action =
+                CheckFragmentDirections.actionNavigationCheckToCheckDetailFragment(it.id)
+            this.findNavController().navigate(action)
+        }
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.adapter = adapter
+
+        binding.fragmentLoadExerciseButton.setOnClickListener() {
+            val action=LoadExerciseFragmentDirections.actionLoadExerciseFragmentToNavigationHome()
+            this.findNavController().navigate(action)
+
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_load_exercise, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoadExerciseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoadExerciseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
+
+
+

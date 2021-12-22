@@ -35,10 +35,10 @@ class CheckListAdapter(private val onItemClicked:(Exercise)->Unit):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(exercise: Exercise) {
-            binding.fragmentCheckExerciseName.text = exercise.exercise
-            binding.fragmentCheckExerciseSet.text = exercise.set.toString()
-            binding.fragmentCheckExerciseWeight.text = exercise.set.toString()
-            binding.fragmentCheckExerciseCount.text = exercise.count.toString()
+            binding.itemListExerciseName.text = exercise.exercise
+            binding.itemListExerciseSet.text = exercise.set.toString()
+            binding.itemListExerciseWeight.text = exercise.set.toString()
+            binding.itemListExerciseCount.text = exercise.count.toString()
 
         }
     }

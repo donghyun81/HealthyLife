@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/item_list_load_exercise_name"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_between_elements"
+        android:text="@string/fragment_check_exercise_name"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_load_exercise_set"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_list_load_exercise_set"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_list_load_exercise_name"
+        android:layout_margin="@dimen/margin_between_elements"
+        android:text="@string/fragment_check_exercise_set"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_load_exercise_weight"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/item_list_load_exercise_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_list_load_exercise_weight"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/margin_between_elements"
+        android:text="@string/fragment_check_exercise_weight"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_load_exercise_count"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/item_list_load_exercise_set"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/item_list_load_exercise_count"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/margin_between_elements"
+        android:text="@string/fragment_check_exercise_count"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/item_list_load_exercise_weight"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

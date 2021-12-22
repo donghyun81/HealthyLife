@@ -14,17 +14,22 @@ import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import android.graphics.Color
 import android.widget.CalendarView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.healthylife.data.HealthyLifeApplication
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
 import java.util.*
 
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val viewModel:HomeViewModel by activityViewModels {
+        HomeViewModelFactory(
+            (
+                    activity?.application as HealthyLifeApplication).databaseCalendar.calendarExerciseDao()
+        )
+    }
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -43,6 +48,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val collapsibleCalendar: CollapsibleCalendar = binding.calendarView
+
+        val adapter = CalendarListAdapter()
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.adapter = adapter
+
+        binding.loadExercise.setOnClickListener{
+
+        }
 
        binding.scrollView.setOnTouchListener(object: OnSwipeTouchListener(requireContext()){
             override fun onSwipeRight() {
@@ -81,8 +95,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onItemClick(view: View) {
-                var t1:Toast = Toast.makeText(requireContext(), "토스트 메시지2${collapsibleCalendar.selectedDay}", Toast.LENGTH_SHORT)
-                t1.show()
+
             }
             override fun onClickListener() {
                 var t1:Toast = Toast.makeText(requireContext(), "토스트 메시지3", Toast.LENGTH_SHORT)
@@ -109,6 +122,8 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
+
 
 
 
