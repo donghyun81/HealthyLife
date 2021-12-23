@@ -15,7 +15,7 @@ class CalendarListAdapter:ListAdapter<CalendarExercise,CalendarListAdapter.Calen
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CalendarListAdapter.CalendarViewHolder {
+    ): CalendarViewHolder {
         return CalendarViewHolder(
             ItemListCalendarBinding.inflate(LayoutInflater.from(
                 parent.context)

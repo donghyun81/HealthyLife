@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthylife.R
 import com.example.healthylife.data.HealthyLifeApplication
+import com.example.healthylife.data.exercise.Exercise
 import com.example.healthylife.databinding.FragmentCheckBinding
 import com.example.healthylife.databinding.FragmentLoadExerciseBinding
 import com.example.healthylife.ui.check.CheckFragmentDirections
@@ -20,13 +21,21 @@ import com.example.healthylife.ui.check.CheckViewModelFactory
 
 class LoadExerciseFragment : Fragment() {
 
-    private val viewModel: CheckViewModel by activityViewModels {
+    private val exerciseViewModel: CheckViewModel by activityViewModels {
         CheckViewModelFactory(
             (activity?.application as HealthyLifeApplication).databaseExercise.exerciseDao()
         )
     }
 
+    private val homeViewModel:HomeViewModel by activityViewModels {
+        HomeViewModelFactory(
+            (
+                    activity?.application as HealthyLifeApplication).databaseCalendar.calendarExerciseDao()
+        )
+    }
 
+
+    private var loadExercises:MutableList<Exercise>? =null
     private var _binding: FragmentLoadExerciseBinding? = null
     private val binding get() = _binding!!
 
@@ -43,21 +52,30 @@ class LoadExerciseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CheckListAdapter {
-            val action =
-                CheckFragmentDirections.actionNavigationCheckToCheckDetailFragment(it.id)
-            this.findNavController().navigate(action)
+        val adapter = LoadExerciseAdapter {
+            loadExercises?.add(it)
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.adapter = adapter
 
+        exerciseViewModel.allExercises.observe(this.viewLifecycleOwner) { items ->
+            items.let {
+                adapter.submitList(it)
+            }
+        }
+
         binding.fragmentLoadExerciseButton.setOnClickListener() {
+            for (loadExercise in loadExercises!!) {
+                homeViewModel.loadNewCalendar(
+                    homeViewModel.selectedDay.value.toString(),
+                    loadExercise
+                )
+            }
             val action=LoadExerciseFragmentDirections.actionLoadExerciseFragmentToNavigationHome()
             this.findNavController().navigate(action)
 
         }
     }
-
 
 }
 

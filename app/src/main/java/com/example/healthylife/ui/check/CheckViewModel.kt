@@ -27,10 +27,10 @@ class CheckViewModel(private val exerciseDao: ExerciseDao): ViewModel() {
                        weight:String,
                        count: String) {
         val newExercise = getNewExerciseEntry(exercise, set, weight, count)
-        insertItem(newExercise)
+        insertExercise(newExercise)
     }
 
-    private fun insertItem(exercise: Exercise) {
+    private fun insertExercise(exercise: Exercise) {
         viewModelScope.launch {
             exerciseDao.insert(exercise)
         }

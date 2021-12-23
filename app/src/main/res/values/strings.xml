@@ -38,7 +38,9 @@
     <string name="fragment_check_detail_exercise_delete">삭제</string>
 
 
+    <string name="fragment_load_exercise_title">운동 불러오기</string>
     <string name="fragment_load_exercise_button">확인</string>
+
 
 
 </resources>
