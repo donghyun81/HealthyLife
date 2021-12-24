@@ -4,27 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.healthylife.databinding.FragmentHomeBinding
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import android.graphics.Color
 import android.widget.CalendarView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.coroutineScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.healthylife.R
+import com.example.healthylife.data.HealthyLifeApplication
+import com.example.healthylife.ui.check.CheckViewModel
+import com.example.healthylife.ui.check.CheckViewModelFactory
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
+import kotlinx.coroutines.launch
 import java.util.*
 
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-    private var _binding: FragmentHomeBinding? = null
+    private val homeViewModel:HomeViewModel by activityViewModels {
+        HomeViewModelFactory(
+            (
+                    activity?.application as HealthyLifeApplication).databaseCalendar.calendarExerciseDao()
+        )
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -43,6 +52,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val collapsibleCalendar: CollapsibleCalendar = binding.calendarView
+
+        val adapter = CalendarListAdapter()
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.adapter = adapter
+
+
+
+        binding.loadExercise.setOnClickListener{
+            val action = HomeFragmentDirections.actionNavigationHomeToLoadExerciseFragment(
+                getString(R.string.fragment_load_exercise_title)
+            )
+            findNavController().navigate(action)
+        }
 
        binding.scrollView.setOnTouchListener(object: OnSwipeTouchListener(requireContext()){
             override fun onSwipeRight() {
@@ -72,6 +95,13 @@ class HomeFragment : Fragment() {
         collapsibleCalendar.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(
             Calendar.DAY_OF_MONTH))
         collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
+        homeViewModel.setSelecetedDay(collapsibleCalendar.selectedDay.toString())
+        homeViewModel.getCalendarExercise(collapsibleCalendar.selectedDay.toString()).observe(this.viewLifecycleOwner)
+        { items ->
+            items.let {
+                adapter.submitList(it)
+            }
+        }
 
         collapsibleCalendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener{
             override fun onDaySelect() {
@@ -81,8 +111,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onItemClick(view: View) {
-                var t1:Toast = Toast.makeText(requireContext(), "토스트 메시지2${collapsibleCalendar.selectedDay}", Toast.LENGTH_SHORT)
-                t1.show()
+
             }
             override fun onClickListener() {
                 var t1:Toast = Toast.makeText(requireContext(), "토스트 메시지3", Toast.LENGTH_SHORT)
@@ -109,6 +138,8 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
+
 
 
 

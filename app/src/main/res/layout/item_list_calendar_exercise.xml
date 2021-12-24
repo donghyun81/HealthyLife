@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:descendantFocusability="blocksDescendants">
@@ -53,18 +54,25 @@
         android:id="@+id/item_list_calendar_exercise_breaktime"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="90"
+        android:text="120"
         app:layout_constraintStart_toEndOf="@+id/item_list_calendar_exercise_count"
         android:visibility="invisible"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/item_list_calendar_exercise_start_button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/item_list_calendar_exercise_breaktime"
-        android:visibility="visible"/>
-
-
+        android:visibility="visible"
+        android:src="@drawable/ic_sharp_play_arrow_24"
+        />
 </LinearLayout>
+    <Button
+        android:id="@+id/item_list_calendar_exercise_exercise_time"
+        android:layout_width="65dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

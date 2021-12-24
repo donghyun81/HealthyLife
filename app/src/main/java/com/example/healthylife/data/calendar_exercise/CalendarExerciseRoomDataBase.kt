@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.healthylife.data.exercise.ExerciseRoomDatabase
 
-@Database(entities = [CalendarExercise::class], version = 1, exportSchema = false)
+@Database(entities = [CalendarExercise::class], version = 2, exportSchema = false)
 abstract class CalendarExerciseRoomDataBase:RoomDatabase(){
     abstract fun calendarExerciseDao():CalendarExerciseDao
 

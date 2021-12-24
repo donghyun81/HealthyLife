@@ -16,7 +16,7 @@ class CheckFragment : Fragment() {
 
     private val viewModel: CheckViewModel by activityViewModels {
         CheckViewModelFactory(
-            (activity?.application as HealthyLifeApplication).database.exerciseDao()
+            (activity?.application as HealthyLifeApplication).databaseExercise.exerciseDao()
         )
     }
 

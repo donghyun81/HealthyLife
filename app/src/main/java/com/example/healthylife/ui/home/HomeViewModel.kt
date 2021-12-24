@@ -1,13 +1,60 @@
 package com.example.healthylife.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.healthylife.data.calendar_exercise.CalendarExercise
+import com.example.healthylife.data.calendar_exercise.CalendarExerciseDao
+import com.example.healthylife.data.exercise.Exercise
+import com.example.healthylife.data.exercise.ExerciseDao
+import com.shrikanthravi.collapsiblecalendarview.data.Day
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val calendarExerciseDao: CalendarExerciseDao) : ViewModel() {
+    val allCalendarExercise:LiveData<List<CalendarExercise>> = calendarExerciseDao.getExercises().asLiveData()
+    fun getCalendarExercise(selectedDay:String):LiveData<List<CalendarExercise>>
+    =calendarExerciseDao.getExercise(selectedDay).asLiveData()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val _selecetdDay = MutableLiveData<String>()
+    val selectedDay: LiveData<String> =_selecetdDay
+
+    fun setSelecetedDay(selectedDay: String) {
+        _selecetdDay.value=selectedDay
     }
-    val text: LiveData<String> = _text
+
+private fun getNewCalendarEntry(
+    selectedDay:String,
+    exercise:Exercise,
+):CalendarExercise {
+    return CalendarExercise(
+        selectedDay = selectedDay,
+        exercise = exercise,
+    )
 }
+    fun loadNewCalendar(
+        selectedDay: String,
+        exercise: Exercise){
+        val newCalendar =getNewCalendarEntry(selectedDay,exercise)
+        insertCalendar(newCalendar)
+    }
+
+    private fun insertCalendar(calendarExercise: CalendarExercise){
+        viewModelScope.launch {
+            calendarExerciseDao.insert(calendarExercise)
+        }
+    }
+
+
+
+}
+
+
+
+class HomeViewModelFactory(private val calendarExerciseDao: CalendarExerciseDao):ViewModelProvider.Factory{
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if(modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            return HomeViewModel(calendarExerciseDao) as T
+        }
+        throw IllegalArgumentException("Unkown ViewModel class")
+    }
+
+}
+

@@ -1,6 +1,7 @@
 package com.example.healthylife.data.exercise
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -16,5 +17,4 @@ data class Exercise(
     val weight:Int,
     @ColumnInfo(name="count")
     val count:Int
-) {
-}
+)
