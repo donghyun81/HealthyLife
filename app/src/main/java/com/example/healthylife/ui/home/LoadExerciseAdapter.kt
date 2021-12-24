@@ -31,7 +31,7 @@ class LoadExerciseAdapter(private val onItemClicked:(Exercise)->Unit) :
         val current = getItem(position)
         val exercise:Exercise=current
         holder.itemView.setOnClickListener {
-            onItemClicked(exercise)
+            onItemClicked(current)
 
         }
         holder.bind(current)
