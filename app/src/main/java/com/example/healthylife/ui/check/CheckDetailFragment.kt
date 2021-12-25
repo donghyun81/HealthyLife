@@ -53,7 +53,7 @@ class CheckDetailFragment : Fragment() {
             binding.fragmentCheckExerciseDetailName.text.toString(),
             binding.fragmentCheckExerciseDetailSet.text.toString(),
             binding.fragmentCheckExerciseDetailWeight.text.toString(),
-            binding.fragmentCheckExerciseDetailCount.text.toString()
+            binding.fragmentCheckExerciseDetailCount.text.toString(),
         )
     }
 

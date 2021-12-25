@@ -1,6 +1,7 @@
 package com.example.healthylife.ui.check
 
 import androidx.lifecycle.*
+import com.example.healthylife.data.calendar_exercise.CalendarExercise
 import com.example.healthylife.data.exercise.Exercise
 import com.example.healthylife.data.exercise.ExerciseDao
 import kotlinx.coroutines.launch
@@ -13,20 +14,23 @@ class CheckViewModel(private val exerciseDao: ExerciseDao): ViewModel() {
                                  exercise:String,
                                  set: String,
                                  weight:String,
-                                 count: String): Exercise {
+                                 count: String,
+                                ): Exercise {
         return Exercise(
             exercise=exercise,
             set=set.toInt(),
             weight = weight.toInt(),
-            count = count.toInt()
+            count = count.toInt(),
+
         )
     }
 
     fun addNewExercise(exercise:String,
                        set: String,
                        weight:String,
-                       count: String) {
-        val newExercise = getNewExerciseEntry(exercise, set, weight, count)
+                       count: String,
+                       ) {
+        val newExercise = getNewExerciseEntry(exercise, set, weight, count,)
         insertExercise(newExercise)
     }
 
@@ -44,14 +48,16 @@ class CheckViewModel(private val exerciseDao: ExerciseDao): ViewModel() {
         exercise:String,
         set: String,
         weight:String,
-        count: String
+        count: String,
+
     ): Exercise {
         return Exercise(
             id=id,
             exercise=exercise,
             set=set.toInt(),
             weight = weight.toInt(),
-            count = count.toInt()
+            count = count.toInt(),
+
         )
     }
 
@@ -61,7 +67,8 @@ class CheckViewModel(private val exerciseDao: ExerciseDao): ViewModel() {
         exercise:String,
         set: String,
         weight:String,
-        count: String
+        count: String,
+
     ) {
         val updateExercise= getUpdatedExerciseEntry(id,exercise,set,weight,count)
         updateExercise(updateExercise)

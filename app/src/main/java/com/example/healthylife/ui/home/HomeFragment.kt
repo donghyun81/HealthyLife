@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthylife.R
 import com.example.healthylife.data.HealthyLifeApplication
+import com.example.healthylife.data.calendar_exercise.CalendarExercise
 import com.example.healthylife.ui.check.CheckViewModel
 import com.example.healthylife.ui.check.CheckViewModelFactory
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
@@ -52,11 +53,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val collapsibleCalendar: CollapsibleCalendar = binding.calendarView
-
-        val adapter = CalendarListAdapter()
-
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-        binding.recyclerView.adapter = adapter
 
 
 
@@ -96,7 +92,10 @@ class HomeFragment : Fragment() {
             Calendar.DAY_OF_MONTH))
         collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
         homeViewModel.setSelecetedDay(collapsibleCalendar.selectedDay.toString())
-        homeViewModel.getCalendarExercise(collapsibleCalendar.selectedDay.toString()).observe(this.viewLifecycleOwner)
+        val adapter = CalendarListAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
+        homeViewModel.allCalendarExercise().observe(this.viewLifecycleOwner)
         { items ->
             items.let {
                 adapter.submitList(it)
@@ -105,9 +104,8 @@ class HomeFragment : Fragment() {
 
         collapsibleCalendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener{
             override fun onDaySelect() {
-                var t1:Toast = Toast.makeText(requireContext(), "토스트 메시지1", Toast.LENGTH_SHORT)
-                t1.show()
-
+                    var t1: Toast = Toast.makeText(requireContext(), collapsibleCalendar.selectedDay.toString(), Toast.LENGTH_SHORT)
+                    t1.show()
             }
 
             override fun onItemClick(view: View) {

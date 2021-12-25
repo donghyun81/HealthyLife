@@ -9,12 +9,16 @@ import com.shrikanthravi.collapsiblecalendarview.data.Day
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val calendarExerciseDao: CalendarExerciseDao) : ViewModel() {
-    val allCalendarExercise:LiveData<List<CalendarExercise>> = calendarExerciseDao.getExercises().asLiveData()
+    fun allCalendarExercise():LiveData<List<CalendarExercise>> = calendarExerciseDao.getExercises().asLiveData()
     fun getCalendarExercise(selectedDay:String):LiveData<List<CalendarExercise>>
     =calendarExerciseDao.getExercise(selectedDay).asLiveData()
 
+
     private val _selecetdDay = MutableLiveData<String>()
     val selectedDay: LiveData<String> =_selecetdDay
+
+    private val _onclick = MutableLiveData<Boolean>()
+    val onclick: LiveData<Boolean> =_onclick
 
     fun setSelecetedDay(selectedDay: String) {
         _selecetdDay.value=selectedDay
@@ -41,7 +45,6 @@ private fun getNewCalendarEntry(
             calendarExerciseDao.insert(calendarExercise)
         }
     }
-
 
 
 }

@@ -15,6 +15,7 @@ interface ExerciseDao {
     @Query("SELECT * from Exercise WHERE id = :id")
     fun getExercise(id: Int): Flow<Exercise>
 
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(exercise: Exercise)
 

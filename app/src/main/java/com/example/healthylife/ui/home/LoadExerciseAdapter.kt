@@ -1,11 +1,7 @@
 package com.example.healthylife.ui.home
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -29,38 +25,35 @@ class LoadExerciseAdapter(private val onItemClicked:(Exercise)->Unit) :
 
     override fun onBindViewHolder(holder: LoadExerciseViewHolder, position: Int) {
         val current = getItem(position)
-        val exercise:Exercise=current
+
         holder.itemView.setOnClickListener {
             onItemClicked(current)
-
-        }
+             holder.onclickExercise(true)
+            }
         holder.bind(current)
     }
 
     class LoadExerciseViewHolder(private var binding: ItemListLoadExerciseBinding):RecyclerView.ViewHolder(binding.root)
     {
-        private var a=true
-        @SuppressLint("ResourceAsColor")
-        fun bind(exercise:Exercise){
+         fun bind(exercise:Exercise){
             binding.apply {
                 itemListLoadExerciseName.text=exercise.exercise
                 itemListLoadExerciseSet.text=exercise.set.toString()
                 itemListLoadExerciseWeight.text=exercise.weight.toString()
                 itemListLoadExerciseCount.text=exercise.count.toString()
-                itemView.setOnClickListener(){
-                    if(a) {
-                        itemListLoadExerciseLayout.setBackgroundColor(R.drawable.selected_color_exercise)
-                        a=false
-                    }
-                    else{
-                        itemListLoadExerciseLayout.setBackgroundColor(R.drawable.default_color_exercise)
-                        a=true
-                    }
                 }
             }
+        fun onclickExercise(click:Boolean){
+            if(click) {
+               binding.itemListLoadExerciseLayout.setBackgroundColor(R.drawable.selected_color_exercise)
+            }
+            else{
+                binding.itemListLoadExerciseLayout.setBackgroundColor(R.drawable.default_color_exercise)
+            }
+        }
 
         }
-    }
+
 
     companion object DiffCallback {
         private val DiffCallback = object : DiffUtil.ItemCallback<Exercise>() {
@@ -80,5 +73,4 @@ class LoadExerciseAdapter(private val onItemClicked:(Exercise)->Unit) :
 
         }
     }
-
 }

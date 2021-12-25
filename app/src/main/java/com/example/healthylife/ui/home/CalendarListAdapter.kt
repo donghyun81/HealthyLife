@@ -18,7 +18,7 @@ class CalendarListAdapter:ListAdapter<CalendarExercise,CalendarListAdapter.Calen
     ): CalendarViewHolder {
         return CalendarViewHolder(
             ItemListCalendarBinding.inflate(LayoutInflater.from(
-                parent.context)
+                parent.context),parent,false
             )
         )
     }
@@ -51,7 +51,7 @@ class CalendarListAdapter:ListAdapter<CalendarExercise,CalendarListAdapter.Calen
                 oldItem: CalendarExercise,
                 newItem: CalendarExercise
             ): Boolean {
-                return oldItem ==newItem
+                return oldItem.selectedDay ==newItem.selectedDay
             }
 
         }

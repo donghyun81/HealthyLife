@@ -31,7 +31,7 @@ class CheckAddFragment : Fragment() {
             (activity?.application as HealthyLifeApplication).databaseExercise.exerciseDao()
         )
     }
-    private val navigationArgs: CheckDetailFragmentArgs by navArgs()
+
 
     lateinit var exercise: Exercise
 
