@@ -22,6 +22,7 @@ import com.example.healthylife.ui.check.CheckViewModel
 import com.example.healthylife.ui.check.CheckViewModelFactory
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -87,9 +88,7 @@ class HomeFragment : Fragment() {
 
         collapsibleCalendar.setExpandIconVisible(true)
         val today = GregorianCalendar()
-        today.add(Calendar.DATE, 1)
-        collapsibleCalendar.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(
-            Calendar.DAY_OF_MONTH))
+        today.add(Calendar.DATE,1)
         collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
         homeViewModel.setSelecetedDay(collapsibleCalendar.selectedDay.toString())
         val adapter = CalendarListAdapter()
@@ -102,9 +101,10 @@ class HomeFragment : Fragment() {
             }
         }
 
+
         collapsibleCalendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener{
             override fun onDaySelect() {
-                    var t1: Toast = Toast.makeText(requireContext(), collapsibleCalendar.selectedDay.toString(), Toast.LENGTH_SHORT)
+                    var t1: Toast = Toast.makeText(requireContext(), "getCurrentTime()", Toast.LENGTH_SHORT)
                     t1.show()
             }
 
